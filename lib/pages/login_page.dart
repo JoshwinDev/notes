@@ -20,26 +20,18 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Image.asset(
-                  "assets/images/notes.jpeg",
-                  height: 180,
-                  width: 180,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/welcome.jpeg"),
+              fit: BoxFit.cover)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+            children: [
+              SizedBox(
+                  height: 290
+              ),
                 TextFormField(
                   controller: _emailController,
                   validator: DataValidator.isValidEmail,
@@ -49,11 +41,12 @@ class _LoginPageState extends State<LoginPage> {
                     prefixIcon: Icon(Icons.email),
                     labelText: "Email Address",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius:  BorderRadius.circular(30.0),
                       borderSide: const BorderSide(width: 0),
                     ),
+                    ),
                   ),
-                ),
+
                 SizedBox(
                   height: 15,
                 ),
@@ -65,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                     prefixIcon: Icon(Icons.lock_outline),
                     labelText: "Password",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius:  BorderRadius.circular(30.0),
                       borderSide: const BorderSide(width: 0),
                     ),
                   ),
@@ -74,37 +67,34 @@ class _LoginPageState extends State<LoginPage> {
                   height: 15,
                 ),
                 signInButton(context, true, () {
-                  FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: _emailController.text, password: _passwordController.text).then((value) {
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailController.text,
+                          password: _passwordController.text)
+                      .then((value) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }).onError((error, stackTrace) {
                     print("Error ${error.toString()}");
                   });
-
-
                 }),
                 signUpButton()
               ],
             ),
-          ),
         ),
-      ),
-    );
-  }
+
+    );}
 
   Row signUpButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-         Text("Don't have an account?",
-                style: TextStyle(color: Colors.black, fontSize: 15.0)),
-        TextButton(
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text("Don't have an account?",
+          style: TextStyle(color: Colors.black, fontSize: 15.0)),
+      TextButton(
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => SignUpPage()));
           },
           child: Text("Sign Up")),
-        ]);
+    ]);
   }
 }

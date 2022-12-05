@@ -18,16 +18,17 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => AuthenticationCubit(),
+    return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/welcome 2.jpeg"),
+                fit: BoxFit.cover)),
         child: Scaffold(
-            appBar: AppBar(
-              title: Text("Sign Up"),
-            ),
-            body: Form(
-                child: Column(children: [
+            backgroundColor: Colors.transparent,
+            body: Column(
+                children: [
                   SizedBox(
-                    height: 50,
+                      height: 290
                   ),
                   TextFormField(
                     controller: _nameController,
@@ -79,6 +80,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     Navigator.push(
                         context, MaterialPageRoute(builder: (_) => HomePage()));
                   })
-                ]))));
+                ])));
   }
 }

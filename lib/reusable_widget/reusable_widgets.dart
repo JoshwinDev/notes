@@ -21,7 +21,7 @@ BuildContext context, bool isLogin, Function onTap){
           if(states.contains(MaterialState.pressed)){
             return Colors.black;
   }
-          return Colors.white;
+          return Color(0xFF0065FF);
   }),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
