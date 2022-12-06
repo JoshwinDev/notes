@@ -26,9 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/notes.jpeg"),
+              image: AssetImage("assets/images/your notes.jpeg"),
               fit: BoxFit.fill)),
-      child: Text("Create your own notes",style: GoogleFonts.italiana(),
-    ));
+    );
   }
 }
