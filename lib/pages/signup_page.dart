@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/cubit/authentication_cubit.dart';
+import 'package:notes/helpers/data_validators.dart';
 import 'package:notes/pages/home_page.dart';
 import 'package:notes/reusable_widget/reusable_widgets.dart';
 
@@ -13,6 +12,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool isPasswordShown = false;
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
@@ -49,6 +50,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextFormField(
                         controller: _emailController,
+                        validator: DataValidator.isValidEmail,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
                           hintText: "Email Address",
@@ -64,13 +68,33 @@ class _SignUpPageState extends State<SignUpPage> {
                       TextFormField(
                         controller: _passwordController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock_outline),
-                          hintText: "Password",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30.0),
                             borderSide: const BorderSide(width: 0),
                           ),
+                          prefixIcon: Icon(Icons.lock_outline),
+                          hintText: "Password",
+                          suffixIcon: Visibility(
+                            visible: isPasswordShown,
+                            replacement: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isPasswordShown = !isPasswordShown;
+                                });
+                              },
+                              icon: Icon(Icons.visibility),
+                            ),
+                            child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isPasswordShown = !isPasswordShown;
+                                  });
+                                },
+                                icon: Icon(Icons.visibility_off)),
+
+                          ),
                         ),
+                        obscureText: !isPasswordShown,
                       ),
                       SizedBox(
                         height: 24,
