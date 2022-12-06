@@ -58,7 +58,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
       ),
       floatingActionButton: FloatingActionButton(backgroundColor: AppStyle.accentColor,
         onPressed: () async{
-        FirebaseFirestore.instance.collection("Notes").add({
+          FirebaseFirestore.instance.collection("Notes").add({
             "note_title":_titleController.text,
             "creation_date":date,
             "note_content":_mainController.text,
