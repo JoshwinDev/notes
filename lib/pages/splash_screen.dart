@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes/pages/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,10 +24,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage("assets/images/notes.jpeg"),
-    fit: BoxFit.cover)),
-    );
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/notes.jpeg"),
+              fit: BoxFit.fill)),
+      child: Text("Create your own notes",style: GoogleFonts.italiana(),
+    ));
   }
 }
