@@ -25,61 +25,66 @@ class _SignUpPageState extends State<SignUpPage> {
                 fit: BoxFit.cover)),
         child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: Column(
-                children: [
-                  SizedBox(
-                      height: 290
-                  ),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person_outline),
-                      hintText: "Name",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(width: 0),
+            body: Center(
+    child: SingleChildScrollView(reverse: true,
+              child: Padding(padding: EdgeInsets.all(32.0),
+                child: Column(
+                    children: [
+                      SizedBox(
+                          height: 290
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      hintText: "Email Address",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(width: 0),
+                      TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person_outline),
+                          hintText: "Name",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: const BorderSide(width: 0),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock_outline),
-                      hintText: "Password",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(width: 0),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  signInButton(context, false, () {
-                    FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: _emailController.text,
-                        password: _passwordController.text);
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email),
+                          hintText: "Email Address",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: const BorderSide(width: 0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock_outline),
+                          hintText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: const BorderSide(width: 0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      signInButton(context, false, () {
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text);
 
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => HomePage()));
-                  })
-                ])));
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => HomePage()));
+                      })
+                    ]),
+              ),
+            ))));
   }
 }

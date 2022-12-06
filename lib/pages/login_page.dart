@@ -27,63 +27,68 @@ class _LoginPageState extends State<LoginPage> {
               fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
-            children: [
-              SizedBox(
-                  height: 290
+        body: Center(
+          child: SingleChildScrollView(reverse: true,
+            child: Padding(padding: EdgeInsets.all(32.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 290,
+                  ),
+                  TextFormField(
+                    controller: _emailController,
+                    validator: DataValidator.isValidEmail,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: "Email Address",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(width: 0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: isPasswordShown,
+                    style: TextStyle(color: Colors.black.withOpacity(0.9)),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock_outline),
+                      labelText: "Password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(width: 0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  signInButton(context, true, () {
+                    FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text)
+                        .then((value) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    }).onError((error, stackTrace) {
+                      print("Error ${error.toString()}");
+                    });
+                  }),
+                  signUpButton()
+                ],
               ),
-                TextFormField(
-                  controller: _emailController,
-                  validator: DataValidator.isValidEmail,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    labelText: "Email Address",
-                    border: OutlineInputBorder(
-                      borderRadius:  BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(width: 0),
-                    ),
-                    ),
-                  ),
-
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: isPasswordShown,
-                  style: TextStyle(color: Colors.black.withOpacity(0.9)),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock_outline),
-                    labelText: "Password",
-                    border: OutlineInputBorder(
-                      borderRadius:  BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(width: 0),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                signInButton(context, true, () {
-                  FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text)
-                      .then((value) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
-                  });
-                }),
-                signUpButton()
-              ],
             ),
+          ),
         ),
-
-    );}
+      ),
+    );
+  }
 
   Row signUpButton() {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
