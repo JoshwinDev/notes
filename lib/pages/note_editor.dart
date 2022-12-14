@@ -53,6 +53,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
               ),
               style: AppStyle.mainContent,
             ),
+
           ],
         ),
       ),
