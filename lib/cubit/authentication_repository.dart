@@ -23,7 +23,7 @@ class AuthenticationRepository {
 
 
   Future<void> storeUserData(UserModel userModel) async{
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference users = FirebaseFirestore.instance.collection('Notes');
     await users.doc(userModel.id).set(userModel.toJson());
   }
 
